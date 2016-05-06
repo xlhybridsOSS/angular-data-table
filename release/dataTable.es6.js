@@ -50,6 +50,11 @@ class PagerController {
       this.getPages(this.page || 1);
     });
 
+    $scope.$watch('pager.size', (newVal) => {
+      this.calcTotalPages(this.size, this.count);
+      this.getPages(this.page || 1);
+    });
+
     $scope.$watch('pager.page', (newVal) => {
       if (newVal !== 0 && newVal <= this.totalPages) {
         this.getPages(newVal);
@@ -1598,7 +1603,7 @@ class HeaderCellController{
       'resizable': this.column.resizable
     };
 
-    if(this.column.heaerClassName){
+    if(this.column.headerClassName){
       cls[this.column.headerClassName] = true;
     }
 
@@ -1709,7 +1714,7 @@ function HeaderCellDirective($compile){
             let elm = angular.element(`<span>${ctrl.column.headerTemplate.trim()}</span>`);
             angular.element(label).append($compile(elm)(cellScope));
           } else if(ctrl.column.headerRenderer){
-            let elm = angular.element(ctrl.column.headerRenderer($elm));
+            let elm = angular.element(ctrl.column.headerRenderer(cellScope, $elm));
             angular.element(label).append($compile(elm)(cellScope)[0]);
           } else {
             let val = ctrl.column.name;
@@ -2433,7 +2438,7 @@ const ColumnDefaults = {
   className: undefined,
 
   // header cell css class name
-  heaerClassName: undefined,
+  headerClassName: undefined,
 
   // The grow factor relative to other columns. Same as the flex-grow
   // API from http://www.w3.org/TR/css3-flexbox/. Basically,
