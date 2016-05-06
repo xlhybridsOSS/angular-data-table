@@ -74,6 +74,11 @@ var PagerController = (function () {
       _this.getPages(_this.page || 1);
     });
 
+    $scope.$watch('pager.size', function (newVal) {
+      _this.calcTotalPages(_this.size, _this.count);
+      _this.getPages(_this.page || 1);
+    });
+
     $scope.$watch('pager.page', function (newVal) {
       if (newVal !== 0 && newVal <= _this.totalPages) {
         _this.getPages(newVal);
@@ -1276,7 +1281,7 @@ var HeaderCellController = (function () {
         'resizable': this.column.resizable
       };
 
-      if (this.column.heaerClassName) {
+      if (this.column.headerClassName) {
         cls[this.column.headerClassName] = true;
       }
 
@@ -1358,7 +1363,7 @@ function HeaderCellDirective($compile) {
             var elm = angular.element("<span>" + ctrl.column.headerTemplate.trim() + "</span>");
             angular.element(label).append($compile(elm)(cellScope));
           } else if (ctrl.column.headerRenderer) {
-            var elm = angular.element(ctrl.column.headerRenderer($elm));
+            var elm = angular.element(ctrl.column.headerRenderer(cellScope, $elm));
             angular.element(label).append($compile(elm)(cellScope)[0]);
           } else {
             var val = ctrl.column.name;
@@ -1918,7 +1923,7 @@ var ColumnDefaults = {
 
   className: undefined,
 
-  heaerClassName: undefined,
+  headerClassName: undefined,
 
   flexGrow: 0,
 
