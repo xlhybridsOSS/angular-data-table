@@ -1,6 +1,6 @@
 /**
  * angular-data-table - A feature-rich but lightweight ES6 AngularJS Data Table crafted for large data sets!
- * @version v0.4.15
+ * @version v0.5.2
  * @link http://swimlane.com/
  * @license 
  */
@@ -18,9 +18,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -62,7 +62,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   }
 })();
 
-var PagerController = (function () {
+var PagerController = function () {
   PagerController.$inject = ["$scope"];
   function PagerController($scope) {
     var _this = this;
@@ -153,7 +153,7 @@ var PagerController = (function () {
   }]);
 
   return PagerController;
-})();
+}();
 
 function PagerDirective() {
   return {
@@ -172,7 +172,7 @@ function PagerDirective() {
   };
 }
 
-var FooterController = (function () {
+var FooterController = function () {
   FooterController.$inject = ["$scope"];
   function FooterController($scope) {
     var _this2 = this;
@@ -202,7 +202,7 @@ var FooterController = (function () {
   }]);
 
   return FooterController;
-})();
+}();
 
 function FooterDirective() {
   return {
@@ -214,12 +214,12 @@ function FooterDirective() {
       paging: '=',
       onPage: '&'
     },
-    template: "<div class=\"dt-footer\">\n        <div class=\"page-count\">{{footer.paging.count}} total</div>\n        <dt-pager page=\"footer.page\"\n               size=\"footer.paging.size\"\n               count=\"footer.paging.count\"\n               on-page=\"footer.onPaged(page)\"\n               ng-show=\"footer.paging.count > 1\">\n         </dt-pager>\n      </div>",
+    template: "<div class=\"dt-footer\">\n        <div class=\"page-count\">{{footer.paging.count}} total</div>\n        <dt-pager page=\"footer.page\"\n               size=\"footer.paging.size\"\n               count=\"footer.paging.count\"\n               on-page=\"footer.onPaged(page)\"\n               ng-show=\"footer.paging.count / footer.paging.size > 1\">\n         </dt-pager>\n      </div>",
     replace: true
   };
 }
 
-var CellController = (function () {
+var CellController = function () {
   function CellController() {
     _classCallCheck(this, CellController);
   }
@@ -228,7 +228,8 @@ var CellController = (function () {
     key: "styles",
     value: function styles() {
       return {
-        width: this.column.width + 'px'
+        width: this.column.width + 'px',
+        'min-width': this.column.width + 'px'
       };
     }
   }, {
@@ -283,7 +284,7 @@ var CellController = (function () {
   }]);
 
   return CellController;
-})();
+}();
 
 function CellDirective($rootScope, $compile, $log, $timeout) {
   return {
@@ -344,7 +345,7 @@ function CellDirective($rootScope, $compile, $log, $timeout) {
 var cache = {},
     testStyle = document.createElement('div').style;
 
-var prefix = (function () {
+var prefix = function () {
   var styles = window.getComputedStyle(document.documentElement, ''),
       pre = (Array.prototype.slice.call(styles).join('').match(/-(moz|webkit|ms)-/) || styles.OLink === '' && ['', 'o'])[1],
       dom = 'WebKit|Moz|MS|O'.match(new RegExp('(' + pre + ')', 'i'))[1];
@@ -354,7 +355,7 @@ var prefix = (function () {
     css: '-' + pre + '-',
     js: pre[0].toUpperCase() + pre.substr(1)
   };
-})();
+}();
 
 function CamelCase(str) {
   str = str.replace(/[^a-zA-Z0-9 ]/g, " ");
@@ -402,7 +403,7 @@ function TranslateXY(styles, x, y) {
   }
 }
 
-var GroupRowController = (function () {
+var GroupRowController = function () {
   function GroupRowController() {
     _classCallCheck(this, GroupRowController);
   }
@@ -427,7 +428,7 @@ var GroupRowController = (function () {
   }]);
 
   return GroupRowController;
-})();
+}();
 
 function GroupRowDirective() {
   return {
@@ -466,7 +467,7 @@ function DeepValueGetter(obj, path) {
   return current;
 }
 
-var RowController = (function () {
+var RowController = function () {
   function RowController() {
     _classCallCheck(this, RowController);
   }
@@ -512,7 +513,7 @@ var RowController = (function () {
   }]);
 
   return RowController;
-})();
+}();
 
 function RowDirective() {
   return {
@@ -568,7 +569,7 @@ var KEYS = {
   NUMPAD_9: 105
 };
 
-var SelectionController = (function () {
+var SelectionController = function () {
   SelectionController.$inject = ["$scope"];
   function SelectionController($scope) {
     _classCallCheck(this, SelectionController);
@@ -699,7 +700,7 @@ var SelectionController = (function () {
   }]);
 
   return SelectionController;
-})();
+}();
 
 function SelectionDirective() {
   return {
@@ -710,13 +711,13 @@ function SelectionDirective() {
   };
 }
 
-var requestAnimFrame = (function () {
+var requestAnimFrame = function () {
   return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
     window.setTimeout(callback, 1000 / 60);
   };
-})();
+}();
 
-var StyleTranslator = (function () {
+var StyleTranslator = function () {
   function StyleTranslator(height) {
     _classCallCheck(this, StyleTranslator);
 
@@ -745,7 +746,7 @@ var StyleTranslator = (function () {
   }]);
 
   return StyleTranslator;
-})();
+}();
 
 function ScrollerDirective($timeout, $rootScope) {
   return {
@@ -808,7 +809,7 @@ function ScrollerDirective($timeout, $rootScope) {
   };
 }
 
-var BodyController = (function () {
+var BodyController = function () {
   BodyController.$inject = ["$scope", "$timeout"];
   function BodyController($scope, $timeout) {
     var _this3 = this;
@@ -1215,7 +1216,7 @@ var BodyController = (function () {
   }]);
 
   return BodyController;
-})();
+}();
 
 function BodyDirective($timeout) {
   return {
@@ -1258,7 +1259,7 @@ function NextSortDirection(sortType, currentSort) {
   }
 }
 
-var HeaderCellController = (function () {
+var HeaderCellController = function () {
   function HeaderCellController() {
     _classCallCheck(this, HeaderCellController);
   }
@@ -1327,7 +1328,7 @@ var HeaderCellController = (function () {
   }]);
 
   return HeaderCellController;
-})();
+}();
 
 function HeaderCellDirective($compile) {
   return {
@@ -1350,7 +1351,7 @@ function HeaderCellDirective($compile) {
       return {
         pre: function pre($scope, $elm, $attrs, ctrl) {
           var label = $elm[0].querySelector('.dt-header-cell-label'),
-              cellScope = undefined;
+              cellScope = void 0;
 
           if (ctrl.column.headerTemplate || ctrl.column.headerRenderer) {
             cellScope = ctrl.options.$outer.$new(false);
@@ -1363,8 +1364,8 @@ function HeaderCellDirective($compile) {
             var elm = angular.element("<span>" + ctrl.column.headerTemplate.trim() + "</span>");
             angular.element(label).append($compile(elm)(cellScope));
           } else if (ctrl.column.headerRenderer) {
-            var elm = angular.element(ctrl.column.headerRenderer(cellScope, $elm));
-            angular.element(label).append($compile(elm)(cellScope)[0]);
+            var _elm = angular.element(ctrl.column.headerRenderer(cellScope, $elm));
+            angular.element(label).append($compile(_elm)(cellScope)[0]);
           } else {
             var val = ctrl.column.name;
             if (val === undefined || val === null) val = '';
@@ -1376,7 +1377,7 @@ function HeaderCellDirective($compile) {
   };
 }
 
-var HeaderController = (function () {
+var HeaderController = function () {
   function HeaderController() {
     _classCallCheck(this, HeaderController);
   }
@@ -1447,7 +1448,7 @@ var HeaderController = (function () {
   }]);
 
   return HeaderController;
-})();
+}();
 
 function HeaderDirective($timeout) {
   return {
@@ -1611,7 +1612,7 @@ function ResizableDirective($document, $timeout) {
       function mousemove(event) {
         event = event.originalEvent || event;
 
-        var width = parent[0].scrollWidth,
+        var width = parent[0].clientWidth,
             movementX = event.movementX || event.mozMovementX || event.screenX - prevScreenX,
             newWidth = width + (movementX || 0);
 
@@ -1627,7 +1628,11 @@ function ResizableDirective($document, $timeout) {
       function mouseup() {
         if ($scope.onResize) {
           $timeout(function () {
-            $scope.onResize({ width: parent[0].scrollWidth });
+            var width = parent[0].clientWidth;
+            if (width < $scope.minWidth) {
+              width = $scope.minWidth;
+            }
+            $scope.onResize({ width: width });
           });
         }
 
@@ -1698,7 +1703,6 @@ var DataTableService = {
       this.dTables[id] = columnsArray;
     }
   },
-
   buildColumns: function buildColumns(scope, parse) {
     var _this5 = this;
 
@@ -1707,6 +1711,8 @@ var DataTableService = {
 
       angular.forEach(columnElms, function (c) {
         var column = {};
+
+        var visible = true;
 
         angular.forEach(c.attributes, function (attr) {
           var attrName = CamelCase(attr.name);
@@ -1724,6 +1730,9 @@ var DataTableService = {
             case 'cellDataGetter':
               column[attrName] = parse(attr.value);
               break;
+            case 'visible':
+              visible = parse(attr.value)(scope);
+              break;
             default:
               column[attrName] = parse(attr.value)(scope);
               break;
@@ -1740,7 +1749,7 @@ var DataTableService = {
           column.template = c.innerHTML;
         }
 
-        _this5.columns[id].push(column);
+        if (visible) _this5.columns[id].push(column);
       });
     });
 
@@ -1770,7 +1779,7 @@ function ScaleColumns(colsByGroup, maxWidth, totalFlexGrow) {
   var hasMinWidth = {};
   var remainingWidth = maxWidth;
 
-  var _loop = function () {
+  var _loop = function _loop() {
     var widthPerFlexPoint = remainingWidth / totalFlexGrow;
     remainingWidth = 0;
     angular.forEach(colsByGroup, function (cols) {
@@ -1833,8 +1842,8 @@ function GetTotalFlexGrow(columns) {
     _iteratorError = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion && _iterator["return"]) {
-        _iterator["return"]();
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
       }
     } finally {
       if (_didIteratorError) {
@@ -2001,7 +2010,7 @@ var TableDefaults = {
 
 };
 
-var DataTableController = (function () {
+var DataTableController = function () {
   DataTableController.$inject = ["$scope", "$filter", "$log", "$transclude"];
   function DataTableController($scope, $filter, $log, $transclude) {
     var _this6 = this;
@@ -2131,9 +2140,7 @@ var DataTableController = (function () {
       });
 
       if (sorts.length) {
-        if (this.onSort()) {
-          this.onSort()(sorts);
-        }
+        this.onSort({ sorts: sorts });
 
         if (this.options.onSort) {
           this.options.onSort(sorts);
@@ -2204,8 +2211,8 @@ var DataTableController = (function () {
       return this.selected.length === this.rows.length;
     }
   }, {
-    key: "onResize",
-    value: function onResize(column, width) {
+    key: "onResized",
+    value: function onResized(column, width) {
       var idx = this.options.columns.indexOf(column);
       if (idx > -1) {
         var column = this.options.columns[idx];
@@ -2214,6 +2221,13 @@ var DataTableController = (function () {
 
         this.adjustColumns(idx);
         this.calculateColumns();
+      }
+
+      if (this.onColumnResize) {
+        this.onColumnResize({
+          column: column,
+          width: width
+        });
       }
     }
   }, {
@@ -2240,7 +2254,7 @@ var DataTableController = (function () {
   }]);
 
   return DataTableController;
-})();
+}();
 
 function DataTableDirective($window, $timeout, $parse) {
   return {
@@ -2258,7 +2272,8 @@ function DataTableDirective($window, $timeout, $parse) {
       onTreeToggle: '&',
       onPage: '&',
       onRowClick: '&',
-      onRowDblClick: '&'
+      onRowDblClick: '&',
+      onColumnResize: '&'
     },
     controllerAs: 'dt',
     template: function template(element) {
@@ -2266,7 +2281,7 @@ function DataTableDirective($window, $timeout, $parse) {
           id = ObjectId();
       DataTableService.saveColumns(id, columns);
 
-      return "<div class=\"dt\" ng-class=\"dt.tableCss()\" data-column-id=\"" + id + "\">\n          <dt-header options=\"dt.options\"\n                     on-checkbox-change=\"dt.onHeaderCheckboxChange()\"\n                     columns=\"dt.columnsByPin\"\n                     column-widths=\"dt.columnWidths\"\n                     ng-if=\"dt.options.headerHeight\"\n                     on-resize=\"dt.onResize(column, width)\"\n                     selected=\"dt.isAllRowsSelected()\"\n                     on-sort=\"dt.onSorted()\">\n          </dt-header>\n          <dt-body rows=\"dt.rows\"\n                   selected=\"dt.selected\"\n                   expanded=\"dt.expanded\"\n                   columns=\"dt.columnsByPin\"\n                   on-select=\"dt.onSelected(rows)\"\n                   on-row-click=\"dt.onRowClicked(row)\"\n                   on-row-dbl-click=\"dt.onRowDblClicked(row)\"\n                   column-widths=\"dt.columnWidths\"\n                   options=\"dt.options\"\n                   on-page=\"dt.onBodyPage(offset, size)\"\n                   on-tree-toggle=\"dt.onTreeToggled(row, cell)\">\n           </dt-body>\n          <dt-footer ng-if=\"dt.options.footerHeight\"\n                     ng-style=\"{ height: dt.options.footerHeight + 'px' }\"\n                     on-page=\"dt.onFooterPage(offset, size)\"\n                     paging=\"dt.options.paging\">\n           </dt-footer>\n        </div>";
+      return "<div class=\"dt\" ng-class=\"dt.tableCss()\" data-column-id=\"" + id + "\">\n          <dt-header options=\"dt.options\"\n                     on-checkbox-change=\"dt.onHeaderCheckboxChange()\"\n                     columns=\"dt.columnsByPin\"\n                     column-widths=\"dt.columnWidths\"\n                     ng-if=\"dt.options.headerHeight\"\n                     on-resize=\"dt.onResized(column, width)\"\n                     selected=\"dt.isAllRowsSelected()\"\n                     on-sort=\"dt.onSorted()\">\n          </dt-header>\n          <dt-body rows=\"dt.rows\"\n                   selected=\"dt.selected\"\n                   expanded=\"dt.expanded\"\n                   columns=\"dt.columnsByPin\"\n                   on-select=\"dt.onSelected(rows)\"\n                   on-row-click=\"dt.onRowClicked(row)\"\n                   on-row-dbl-click=\"dt.onRowDblClicked(row)\"\n                   column-widths=\"dt.columnWidths\"\n                   options=\"dt.options\"\n                   on-page=\"dt.onBodyPage(offset, size)\"\n                   on-tree-toggle=\"dt.onTreeToggled(row, cell)\">\n           </dt-body>\n          <dt-footer ng-if=\"dt.options.footerHeight\"\n                     ng-style=\"{ height: dt.options.footerHeight + 'px' }\"\n                     on-page=\"dt.onFooterPage(offset, size)\"\n                     paging=\"dt.options.paging\">\n           </dt-footer>\n        </div>";
     },
     compile: function compile(tElem, tAttrs) {
       return {
@@ -2305,7 +2320,7 @@ function DataTableDirective($window, $timeout, $parse) {
             ctrl.adjustColumns();
           };
 
-          angular.element($window).bind('resize', throttle(function () {
+          $window.addEventListener('resize', throttle(function () {
             $timeout(resize);
           }));
 
@@ -2329,5 +2344,4 @@ function DataTableDirective($window, $timeout, $parse) {
 
 var dataTable = angular.module('data-table', []).directive('dtable', DataTableDirective).directive('resizable', ResizableDirective).directive('sortable', SortableDirective).directive('dtHeader', HeaderDirective).directive('dtHeaderCell', HeaderCellDirective).directive('dtBody', BodyDirective).directive('dtScroller', ScrollerDirective).directive('dtSeletion', SelectionDirective).directive('dtRow', RowDirective).directive('dtGroupRow', GroupRowDirective).directive('dtCell', CellDirective).directive('dtFooter', FooterDirective).directive('dtPager', PagerDirective);
 
-exports["default"] = dataTable;
-module.exports = exports["default"];
+exports.default = dataTable;
